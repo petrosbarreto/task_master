@@ -19,8 +19,8 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Placeholder: RecyclerView virá na Aula 05 -->
-    <TextView
-        android:id="@+id/tvVazio"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nenhuma tarefa ainda.\nToque em + para adicionar!"

@@ -1,3 +1,7 @@
+package com.example.taskmaster
+
+import TarefaAdapter
+import Tarefa
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
