@@ -1,4 +1,6 @@
 // Tarefa.kt
+
+package com.example.taskmaster
 data class Tarefa(
     val id: Int,
     val titulo: String,
