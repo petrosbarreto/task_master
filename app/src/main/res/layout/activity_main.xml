@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F8FAFC">
@@ -9,7 +10,7 @@
     <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="0dp"
+        android:layout_width="10dp"
         android:layout_height="?attr/actionBarSize"
         android:background="#4F46E5"
         android:title="TaskMaster"
@@ -19,8 +20,8 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Placeholder: RecyclerView virá na Aula 05 -->
-    <TextView
-        android:id="@+id/tvVazio"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nenhuma tarefa ainda.\nToque em + para adicionar!"
@@ -31,6 +32,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
 
     <!-- FAB — abrirá activity_nova_tarefa -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
