@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="checkConcluida" type="id" />
+    <item name="tvTitulo" type="id" />
+    <item name="tvPrazo" type="id" />
+    <item name="tvPrioridade" type="id" />
+    <item name="recyclerView" type="id" />
+</resources>

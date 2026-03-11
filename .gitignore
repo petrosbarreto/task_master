@@ -13,3 +13,15 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Android build outputs & caches
+*.apk
+*.aab
+*.dex
+*.class
+
+# Android Studio & IntelliJ
+.idea/tasks.xml
+
+# Kotlin
+.kotlin/
