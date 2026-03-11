@@ -1,3 +1,5 @@
+package com.otton.taskmaster
+
 // Tarefa.kt
 data class Tarefa(
     val id: Int,
