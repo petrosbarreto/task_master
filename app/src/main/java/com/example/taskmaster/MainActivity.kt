@@ -1,3 +1,7 @@
+package com.example.taskmaster
+
+import Tarefa
+import TarefaAdapter
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -20,11 +24,23 @@ class MainActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerView)
 
         // Mock data — substituído por banco na Aula 09
-        tarefas.addAll(listOf(
-            Tarefa(1, "Estudar RecyclerView", prazo = "10/03/2026", prioridade = Prioridade.ALTA),
-            Tarefa(2, "Fazer exercício da aula", prazo = "12/03/2026", prioridade = Prioridade.MEDIA),
-            Tarefa(3, "Revisar Layouts XML", concluida = true, prioridade = Prioridade.BAIXA)
-        ))
+        tarefas.addAll(
+            listOf(
+                Tarefa(
+                    1,
+                    "Estudar RecyclerView",
+                    prazo = "10/03/2026",
+                    prioridade = Prioridade.ALTA
+                ),
+                Tarefa(
+                    2,
+                    "Fazer exercício da aula",
+                    prazo = "12/03/2026",
+                    prioridade = Prioridade.MEDIA
+                ),
+                Tarefa(3, "Revisar Layouts XML", concluida = true, prioridade = Prioridade.BAIXA)
+            )
+        )
 
         adapter = TarefaAdapter(
             tarefas = tarefas,
@@ -41,6 +57,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
+        //FAB
         // FAB para nova tarefa
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
             startActivity(Intent(this, NovaTarefaActivity::class.java))
