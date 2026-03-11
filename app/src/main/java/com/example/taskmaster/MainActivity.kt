@@ -1,10 +1,11 @@
+package com.example.taskmaster
+
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.taskmaster.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
@@ -19,29 +20,43 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerView)
 
-        // Mock data — substituído por banco na Aula 09
         tarefas.addAll(listOf(
-            Tarefa(1, "Estudar RecyclerView", prazo = "10/03/2026", prioridade = Prioridade.ALTA),
-            Tarefa(2, "Fazer exercício da aula", prazo = "12/03/2026", prioridade = Prioridade.MEDIA),
-            Tarefa(3, "Revisar Layouts XML", concluida = true, prioridade = Prioridade.BAIXA)
+            Tarefa(
+                id = 1,
+                titulo = "Estudar RecyclerView",
+                prazo = "10/03/2026",
+                concluida = false,
+                prioridade = Prioridade.ALTA
+            ),
+            Tarefa(
+                id = 2,
+                titulo = "Fazer exercício da aula",
+                prazo = "12/03/2026",
+                concluida = false,
+                prioridade = Prioridade.MEDIA
+            ),
+            Tarefa(
+                id = 3,
+                titulo = "Revisar Layouts XML",
+                prazo = "",
+                concluida = true,
+                prioridade = Prioridade.BAIXA
+            )
         ))
 
         adapter = TarefaAdapter(
             tarefas = tarefas,
             onItemClick = { tarefa ->
                 Toast.makeText(this, "Tarefa: ${tarefa.titulo}", Toast.LENGTH_SHORT).show()
-                // Aula 06: startActivity para DetalhesActivity
             },
             onCheckClick = { tarefa, checked ->
                 tarefa.concluida = checked
-                adapter.notifyItemChanged(tarefas.indexOf(tarefa))
             }
         )
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
-        // FAB para nova tarefa
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
             startActivity(Intent(this, NovaTarefaActivity::class.java))
         }

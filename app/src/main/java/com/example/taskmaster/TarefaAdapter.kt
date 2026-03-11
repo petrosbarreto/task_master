@@ -1,3 +1,5 @@
+package com.example.taskmaster
+
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
@@ -5,14 +7,12 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.taskmaster.R
 
-// TarefaAdapter.kt
-class `TarefaAdapter`(
+class TarefaAdapter(
     private val tarefas: MutableList<Tarefa>,
     private val onItemClick: (Tarefa) -> Unit,
     private val onCheckClick: (Tarefa, Boolean) -> Unit
-) : RecyclerView.Adapter<`TarefaAdapter`.ViewHolder>() {
+) : RecyclerView.Adapter<TarefaAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -34,19 +34,24 @@ class `TarefaAdapter`(
 
         fun bind(tarefa: Tarefa) {
             tvTitulo.text = tarefa.titulo
-            tvPrazo.text  = if (tarefa.prazo.isNotEmpty()) "Prazo: ${tarefa.prazo}" else "Sem prazo"
+            tvPrazo.text = if (tarefa.prazo.isNotEmpty()) "Prazo: ${tarefa.prazo}" else "Sem prazo"
             tvPrioridade.text = tarefa.prioridade.label
 
-            // Risco no texto se concluída
-            tvTitulo.paintFlags = if (tarefa.concluida)
+            tvTitulo.paintFlags = if (tarefa.concluida) {
                 tvTitulo.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-            else
+            } else {
                 tvTitulo.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+            }
 
+            checkConcluida.setOnCheckedChangeListener(null)
             checkConcluida.isChecked = tarefa.concluida
-            itemView.setOnClickListener { onItemClick(tarefa) }
+
             checkConcluida.setOnCheckedChangeListener { _, checked ->
                 onCheckClick(tarefa, checked)
+            }
+
+            itemView.setOnClickListener {
+                onItemClick(tarefa)
             }
         }
     }
