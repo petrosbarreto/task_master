@@ -1,0 +1,21 @@
+# Gradle & Build
+.gradle/
+build/
+local.properties
+
+# Android Studio & IDE
+.idea/
+*.iml
+captures/
+.externalNativeBuild/
+.cxx/
+*.hprof
+
+# Output
+*.apk
+*.aab
+output-metadata.json
+
+# Keystore
+*.jks
+*.keystore
