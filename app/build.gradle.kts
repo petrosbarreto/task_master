@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.taskmaster"
+    namespace = "com.vitor_moura48.taskmaster"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.taskmaster"
+        applicationId = "com.vitor_moura48.taskmaster"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
@@ -36,7 +36,7 @@ android {
 }
 
 dependencies {
-    implementation("androidx.recyclerview:recyclerview:1.3.2")
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

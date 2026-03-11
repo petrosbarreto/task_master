@@ -1,4 +1,4 @@
-package com.example.taskmaster
+package com.vitor_moura48.taskmaster
 
 import org.junit.Test
 

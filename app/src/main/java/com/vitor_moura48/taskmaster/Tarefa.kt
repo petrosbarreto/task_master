@@ -1,3 +1,5 @@
+package com.vitor_moura48.taskmaster
+
 // Tarefa.kt
 data class Tarefa(
     val id: Int,

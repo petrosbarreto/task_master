@@ -1,21 +1,27 @@
-# Gradle & Build
-.gradle/
-build/
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
 local.properties
 
-# Android Studio & IDE
-.idea/
-*.iml
-captures/
-.externalNativeBuild/
-.cxx/
-*.hprof
-
-# Output
+# Android build outputs & caches
 *.apk
 *.aab
-output-metadata.json
+*.dex
+*.class
 
-# Keystore
-*.jks
-*.keystore
+# Android Studio & IntelliJ
+.idea/tasks.xml
+
+# Kotlin
+.kotlin/

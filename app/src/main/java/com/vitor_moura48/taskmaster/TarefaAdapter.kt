@@ -1,3 +1,5 @@
+package com.vitor_moura48.taskmaster
+
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
@@ -5,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.taskmaster.R
 
 // TarefaAdapter.kt
 class `TarefaAdapter`(
@@ -43,7 +44,10 @@ class `TarefaAdapter`(
             else
                 tvTitulo.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
 
+            checkConcluida.setOnCheckedChangeListener(null)
+
             checkConcluida.isChecked = tarefa.concluida
+
             itemView.setOnClickListener { onItemClick(tarefa) }
             checkConcluida.setOnCheckedChangeListener { _, checked ->
                 onCheckClick(tarefa, checked)
