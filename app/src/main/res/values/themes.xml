@@ -6,4 +6,10 @@
     </style>
 
     <style name="Theme.TaskMaster" parent="Base.Theme.TaskMaster" />
+
+    <!-- Tema para a SplashActivity: fundo roxo sem action bar -->
+    <style name="Theme.TaskMaster.Splash" parent="Theme.TaskMaster">
+        <item name="android:windowBackground">#4F46E5</item>
+        <item name="android:statusBarColor">#4F46E5</item>
+    </style>
 </resources>

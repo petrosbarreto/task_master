@@ -54,20 +54,64 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Prazo (dd/mm/aaaa)"
-            android:layout_marginBottom="24dp">
+            android:layout_marginBottom="16dp">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPrazo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="date" />
+                android:inputType="datetime" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Prioridade -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Prioridade"
+            android:textSize="14sp"
+            android:textColor="#64748B"
+            android:layout_marginBottom="8dp" />
+
+        <RadioGroup
+            android:id="@+id/rgPrioridade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="24dp">
+
+            <RadioButton
+                android:id="@+id/rbBaixa"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Baixa"
+                android:textColor="#10B981" />
+
+            <RadioButton
+                android:id="@+id/rbMedia"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Média"
+                android:checked="true"
+                android:textColor="#F59E0B" />
+
+            <RadioButton
+                android:id="@+id/rbAlta"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Alta"
+                android:textColor="#EF4444" />
+
+        </RadioGroup>
 
         <Button
             android:id="@+id/btnSalvar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Salvar Tarefa"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:backgroundTint="#4F46E5" />
 
     </LinearLayout>
 </ScrollView>

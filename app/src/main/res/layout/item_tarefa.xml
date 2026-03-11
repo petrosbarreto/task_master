@@ -50,9 +50,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="11sp"
+            android:textStyle="bold"
             android:textColor="#FFFFFF"
-            android:paddingHorizontal="8dp"
-            android:paddingVertical="4dp" />
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="4dp"
+            android:background="@drawable/bg_prioridade_badge" />
 
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
