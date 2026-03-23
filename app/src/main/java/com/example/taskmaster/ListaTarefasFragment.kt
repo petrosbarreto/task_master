@@ -2,20 +2,15 @@ package com.example.taskmaster
 
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class ListaTarefasFragment : Fragment(R.layout.fragment_lista_tarefas) {
-
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var tvVazio: TextView
-    private lateinit var adapter: TarefaAdapter
 
     private val mainActivity: MainActivity
         get() = requireActivity() as MainActivity
@@ -23,34 +18,28 @@ class ListaTarefasFragment : Fragment(R.layout.fragment_lista_tarefas) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recyclerView = view.findViewById(R.id.recyclerView)
-        tvVazio = view.findViewById(R.id.tvVazio)
+        val viewPager = view.findViewById<ViewPager2>(R.id.viewPager)
+        val tabLayout = view.findViewById<TabLayout>(R.id.tabLayout)
         val fab = view.findViewById<FloatingActionButton>(R.id.fab)
 
-        adapter = TarefaAdapter(
-            tarefas = mainActivity.obterTarefas(),
-            onItemClick = { tarefa ->
-                findNavController().navigate(
-                    R.id.action_listaTarefasFragment_to_detalhesFragment,
-                    bundleOf(
-                        DetalhesFragment.ARG_TITULO to tarefa.titulo,
-                        DetalhesFragment.ARG_DESCRICAO to tarefa.descricao,
-                        DetalhesFragment.ARG_PRAZO to tarefa.prazo,
-                        DetalhesFragment.ARG_PRIORIDADE to tarefa.prioridade.name,
-                        DetalhesFragment.ARG_CONCLUIDA to tarefa.concluida
-                    )
-                )
-            },
-            onCheckClick = { tarefa, checked ->
-                tarefa.concluida = checked
-                adapter.notifyItemChanged(mainActivity.obterTarefas().indexOf(tarefa))
-                atualizarEstadoVazio()
+        // Configura o ViewPager2 com o adapter de abas
+        val pagerAdapter = AbasViewPagerAdapter(this)
+        viewPager.adapter = pagerAdapter
+
+        // Liga as abas ao ViewPager2
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            tab.text = when (position) {
+                0 -> "Pendentes"
+                else -> "Concluídas"
             }
-        )
+        }.attach()
 
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = adapter
+        // Abre tela de nova tarefa ao tocar no FAB
+        fab.setOnClickListener {
+            findNavController().navigate(R.id.action_listaTarefasFragment_to_novaTarefaFragment)
+        }
 
+        // Recebe resultado da NovaTarefaFragment e adiciona a tarefa
         parentFragmentManager.setFragmentResultListener(
             NovaTarefaFragment.REQUEST_KEY,
             viewLifecycleOwner
@@ -61,24 +50,19 @@ class ListaTarefasFragment : Fragment(R.layout.fragment_lista_tarefas) {
             val prioridade = Prioridade.valueOf(
                 bundle.getString(NovaTarefaFragment.BUNDLE_PRIORIDADE) ?: Prioridade.MEDIA.name
             )
-
             mainActivity.adicionarTarefa(titulo, descricao, prazo, prioridade)
-            adapter.notifyItemInserted(mainActivity.obterTarefas().lastIndex)
-            recyclerView.scrollToPosition(mainActivity.obterTarefas().lastIndex)
-            atualizarEstadoVazio()
-        }
 
-        fab.setOnClickListener {
-            findNavController().navigate(R.id.action_listaTarefasFragment_to_novaTarefaFragment)
+            // Avisa os fragments de aba para refrescarem a lista
+            notificarAbas()
         }
-
-        atualizarEstadoVazio()
     }
 
-    private fun atualizarEstadoVazio() {
-        val listaVazia = mainActivity.obterTarefas().isEmpty()
-        tvVazio.visibility = if (listaVazia) View.VISIBLE else View.GONE
-        recyclerView.visibility = if (listaVazia) View.GONE else View.VISIBLE
+    /** Envia sinal para PendentesFragment e ConcluidasFragment via childFragmentManager. */
+    fun notificarAbas() {
+        childFragmentManager.setFragmentResult(CHAVE_ATUALIZAR, bundleOf())
+    }
+
+    companion object {
+        const val CHAVE_ATUALIZAR = "tarefas_atualizadas"
     }
 }
-

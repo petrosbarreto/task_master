@@ -28,6 +28,13 @@ class TarefaAdapter(
 
     override fun getItemCount(): Int = tarefas.size
 
+    /** Substitui toda a lista e notifica o RecyclerView. */
+    fun atualizarDados(novaLista: List<Tarefa>) {
+        tarefas.clear()
+        tarefas.addAll(novaLista)
+        notifyDataSetChanged()
+    }
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val tvTitulo: TextView = itemView.findViewById(R.id.tvTitulo)
         private val tvPrazo: TextView = itemView.findViewById(R.id.tvPrazo)
